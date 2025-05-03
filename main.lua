@@ -1,4 +1,4 @@
-repeat wait() until game:IsLoaded()
+repeat task.wait() until game:IsLoaded()
 
 -- Services
 local Players = game:GetService("Players")
@@ -11,30 +11,22 @@ local LocalPlayer = Players.LocalPlayer
 -- Remotes
 local CommF_ = ReplicatedStorage:WaitForChild("Remotes"):FindFirstChild("CommF_")
 
--- Auto team select: Marines
-local function autoSelectTeam()
-    local teamEvent = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ChooseTeam")
-    pcall(function()
-        teamEvent:FireServer("Marines")
-    end)
-end
-
-autoSelectTeam()
-wait(1)
-
 -- Start time
 local startTime = tick()
 
 -- Show logo
 local function createLogo()
-    local gui = Instance.new("ScreenGui", game.CoreGui)
+    local gui = Instance.new("ScreenGui")
     gui.Name = "KaitunFruitLogo"
+    gui.ResetOnSpawn = false
+    pcall(function() gui.Parent = game:GetService("CoreGui") end)
 
-    local img = Instance.new("ImageLabel", gui)
+    local img = Instance.new("ImageLabel")
     img.BackgroundTransparency = 1
     img.Size = UDim2.new(0, 200, 0, 200)
     img.Position = UDim2.new(0.5, -100, 0.1, 0)
-    img.Image = "rbxassetid://17376121791" -- Substitua pelo seu ID após upload no Roblox
+    img.Image = "rbxassetid://17376121791"
+    img.Parent = gui
 end
 
 createLogo()
